@@ -1,6 +1,3 @@
-
-import matplotlib as plo
-
 P = float(input("예치금을 입력하십시오. : "))
 T = int(input("예치 기간을 입력하십시오. : "))
 R = 0.03

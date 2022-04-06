@@ -1,5 +1,4 @@
 from random import randint
-from unittest import result
 
 # 6-1
 def practice_6_1 ():

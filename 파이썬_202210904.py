@@ -1,36 +1,45 @@
-year = int(input("년도를 입력하십시오 : "))
-month_input = int(input("월을 입력하십시오 : "))
-day_input = int(input("일을 입력하십시오 : "))
-DayOfYear = 0
+from random import randint
+from unittest import result
 
-if year % 400 == 0 :
-    print(year, "는 윤년입니다.")
-    if month_input >= 3 :
-        DayOfYear += 1
-elif year % 4 == 0 :
-    if year % 100 == 0 :
-        print(year, "는 윤년이 아닙니다.")
-    else :
-        print(year, "는 윤년입니다.")
-        if month_input >= 3 :
-            DayOfYear += 1
-else :
-    print(year, "는 윤년이 아닙니다.")
+# 6-1
+def practice_6_1 ():
+    num = map(int, input("정수 5개를 입력하십시오 : ").split())
+    return max(num)
+# 6-2
+def practice_6_2 ():
+    A = 0
+    B = 0
+    trying = int(input("몇 번 던질까요? : "))
+    for i in range(0, trying):
+        coin = randint(0, 1)
+        if coin == 0:
+            A += 1
+        else:
+            B += 1
+    print("앞면, 뒷면이 나온 횟수는 각각", A, B, "입니다.")
+    print("앞면이 나올 확률은", (A / trying) * 100, "뒷면이 나올 확률은", (B / trying) * 100, "입니다.")
 
-for i in range(1, month_input) :
-    if i % 2 == 0 :
-        if i == 2 :
-            DayOfYear += 28
-        else :
-            if i >= 8 :
-                DayOfYear += 31
-            else :
-                DayOfYear += 30
-    else :
-        if i >= 8 :
-            DayOfYear += 30
-        else :
-            DayOfYear += 31
-DayOfYear += day_input
-
-print("통일 : ", DayOfYear)
+    times = [A, B]
+    Prob = [(A / trying) * 100, (B / trying) * 100]
+    return times, Prob
+# 6-3
+def practice_6_3 ():
+    num = int(input("1000이하의 숫자를 입력하십시오 : "))
+    print(getSumOfDivisors(num))
+def getSumOfDivisors (num):
+    result = 0
+    for i in range(1, num):
+        if num % i == 0:
+            result += i
+    result += num
+    return result
+# 6-4
+def practice_6_4 ():
+    print(max(input_1()))
+def input_1 ():
+    num = []
+    num.append(int(input("1000 이하의 정수를 입력하세요 : ")))
+    while num.count(1000) != 1:
+        num.append(int(input("1000 이하의 정수를 입력하세요 : ")))
+    num.remove(1000)
+    return num

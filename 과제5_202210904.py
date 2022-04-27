@@ -1,6 +1,3 @@
-from socket import NI_NUMERICSERV
-
-
 def readNumber():
     num = int(input("정수 한 개를 입력하세요: "))
     if num <= 1:

@@ -1,10 +1,8 @@
-from sklearn.metrics import jaccard_score
-
-
 f = open("test.txt", "r")
-lines = list(f.read())
+lines = f.read()
+f.close()
 
-for i in lines:
-    print(i, end="")
-
-print(lines[0])
+f2 = open(lines + "\\haha.txt", "r")
+print(lines+"\\haha.txt")
+for line in f2.readlines():
+    print(f2.readlines())

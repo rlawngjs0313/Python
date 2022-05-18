@@ -1,10 +1,12 @@
-A, B = list(map(int, input().split()))
-C = int(input())
-
-if B+C < 60:
-    print(f"{A} {B+C}")
-else:
-    if A+(B+C)//60 >= 24:
-        print(f"{(A+(B+C)//60)%24} {(B+C)-60*((B+C)//60)}")
+A, B, C = list(map(int, input().split()))
+if A == B == C:
+    print(10000+A*1000)
+elif A == B or B == C or A == C:
+    if A == B:
+        print(1000+A*100)
+    elif B == C:
+        print(1000+C*100)
     else:
-        print(f"{A+(B+C)//60} {(B+C)-60*((B+C)//60)}")
+        print(1000+A*100)
+else:
+    print(max(A,B,C)*100)

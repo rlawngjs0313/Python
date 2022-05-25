@@ -1,10 +1,13 @@
-A, B = list(map(int, input().split()))
-C = int(input())
-
-if B+C < 60:
-    print(f"{A} {B+C}")
-else:
-    if A+(B+C)//60 >= 24:
-        print(f"{(A+(B+C)//60)%24} {(B+C)-60*((B+C)//60)}")
+num = int(input())
+cont = 1
+minus_num = 0
+while True:
+    minus_num += cont*6
+    if num == 1:
+        print(1)
+        break
+    elif num - minus_num <= 1:
+        print(cont+1)
+        break
     else:
-        print(f"{A+(B+C)//60} {(B+C)-60*((B+C)//60)}")
+        cont += 1

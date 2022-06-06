@@ -18,6 +18,7 @@ def reading():
         return file_data
     except FileNotFoundError:
         print("파일을 찾을 수 없습니다.")
+        exit()
     except UnicodeDecodeError:
         with open(file_name, "r", encoding="utf-8") as f:
             file_data = f.readlines()
@@ -27,6 +28,7 @@ def reading():
 def finding(data, lines):
     result_data = []
     cnt = []
+    word = lines
     counting = 0
     for i in data:
         counting += 1
@@ -44,9 +46,12 @@ def finding(data, lines):
             result_data.append(locate_word)
             result_data.append(new_data)
             cnt.append(counting)
-    return cnt, result_data
+    return cnt, result_data, word
 # 53:00
 result = finding(reading(), line_inputing())
 cnt, results = result[0], result[1]
-for i in range(len(cnt)):
-    print(f"{cnt[i]} : {results[2*i]} : {results[2*i+1]}")
+if result[0] != []:
+    for i in range(len(cnt)):
+        print(f"{cnt[i]} : {results[2*i]} : {results[2*i+1]}")
+else:
+    print(f"{result[2]}을(를) 찾을 수 없습니다.")

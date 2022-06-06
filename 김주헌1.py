@@ -45,6 +45,7 @@ def finding(data, lines):
             result_data.append(new_data)
             cnt.append(counting)
     return cnt, result_data
+# 53:00
 result = finding(reading(), line_inputing())
 cnt, results = result[0], result[1]
 for i in range(len(cnt)):

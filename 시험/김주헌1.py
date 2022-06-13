@@ -47,7 +47,8 @@ def finding(data, lines):
             result_data.append(locate_word)
             result_data.append(new_data)
             cnt.append(counting)
-    return cnt, result_data, word
+    return cnt, result_data, word 
+# [(3, 7, 9번째 줄), [(1, ), "언어로, ...", (1, 17, 35), "언어로서의 ..."], "언어"]
 # 53:00
 result = finding(reading(), line_inputing())
 d = {}

@@ -11,6 +11,7 @@ def line_inputing():
 def reading():
     file_name = inputing()
     try:
+        print(file_name)
         with open(file_name, "r", encoding="cp949") as f:
             file_data = f.readlines()
             for i in range(0, len(file_data)):
@@ -49,9 +50,11 @@ def finding(data, lines):
     return cnt, result_data, word
 # 53:00
 result = finding(reading(), line_inputing())
-cnt, results = result[0], result[1]
-if result[0] != []:
-    for i in range(len(cnt)):
-        print(f"{cnt[i]} : {results[2*i]} : {results[2*i+1]}")
+d = {}
+for i in range(0, len(result[1]), 2):
+    d[result[1][i]] = result[1][i+1]
+if d == {}:
+    print(f"{result[2]}를 찾을 수 없습니다.")
 else:
-    print(f"{result[2]}을(를) 찾을 수 없습니다.")
+    for i in range(len(d)):
+        print(f"{result[0][i]} : {list(d.keys())[i]} : {list(d.values())[i]}")

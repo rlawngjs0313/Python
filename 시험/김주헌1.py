@@ -11,8 +11,7 @@ def line_inputing():
 def reading():
     file_name = inputing()
     try:
-        print(file_name)
-        with open(file_name, "r", encoding="cp949") as f:
+        with open(file_name, encoding="cp949") as f:
             file_data = f.readlines()
             for i in range(0, len(file_data)):
                 file_data[i] = file_data[i].strip()

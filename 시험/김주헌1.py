@@ -51,7 +51,7 @@ def finding(data, lines):
 # 53:00
 result = finding(reading(), line_inputing())
 d = {}
-for i in range(0, len(result[1]), 2):
+for i in range(0, len(result[1]), 2): # 데이터 딕셔너리로 만들기
     d[result[1][i]] = result[1][i+1]
 if d == {}:
     print(f"{result[2]}를 찾을 수 없습니다.")

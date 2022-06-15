@@ -50,3 +50,12 @@ for i in words:
     else:
         d[i] = 1
 print(d)
+# 클래스
+class Testclass:
+    def __init__(self,a,b):
+        self.a = a
+        self.b = b
+    def plus(self):
+        result = self.a + self.b
+        return result
+A = Testclass(3,4)

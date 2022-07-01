@@ -1,15 +1,14 @@
 C = int(input())
-for i in range(C):
-    H, W, N = map(int, input().split())
-    H1 = N%H
-    H2 = N//H+1
-    if H1 == 0:
-        if H2 <= 10:
-            print(f"{H}0{H2-1}")
-        else:
-            print(f"{H}{H2-1}")
-    else:
-        if H2 < 10:
-            print(f"{H1}0{H2}")
-        else:
-            print(f"{H1}{H2}")
+for k in range(C):
+    K = int(input())
+    N = int(input())
+    L1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+    L2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    for i in range(K):
+        for j in range(N):
+            if j == 0:
+                L2[j] = L1[j]
+            else:
+                L2[j] = L2[j-1] + L1[j]
+                L1[j] = L2[j]
+    print(L2.pop(N-1))

@@ -1,12 +1,19 @@
-N = int(input())
-while N > 0:
-    a = [False] + [True] * (2*N-1)
-    m = int((2*N)**0.5)
+def isPrime(n):
+    if n == 1:
+        return False
+    for j in range(2, int(n**0.5) + 1):
+        if n % j == 0:
+            return False
+    return True
 
-    for i in range(m + 1):
-        if a[i] == True:
-            for j in range(2*i+1, 2*N, i+1):
-                a[j] = False
-    a = a[N:]
-    print(a.count(True))
-    N = int(input())
+T = int(input())
+for i in range(T):
+    num = int(input())
+    a, b = num//2, num//2
+    while a > 0:
+        if isPrime(a) and isPrime(b):
+            print(a, b)
+            break
+        else:
+            a -= 1
+            b += 1

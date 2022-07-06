@@ -1,8 +1,8 @@
-def pac(num):
+def fibo(num):
     if num == 0:
+        return 0
+    if num == 1:
         return 1
-    if num <= 1:
-        return num
     else:
-        return num * pac(num-1)
-print(pac(int(input())))
+        return fibo(num-1) + fibo(num-2)
+print(fibo(int(input())))

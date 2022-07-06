@@ -1,14 +1,12 @@
+def hano(n, f, t, a):
+    if n == 1:
+        L1.append(f"{f} {t}")
+        return
+    hano(n-1, f, a, t)
+    L1.append(f"{f} {t}")
+    hano(n-1, a, t, f)
+L1 = []
 N = int(input())
-def star(N):
-    if N == 3:
-        return ["***", "* *", "***"]
-    result = []
-    stars = star(N//3)
-    for i in stars:
-        result.append(i*3)
-    for i in stars:
-        result.append(i+' '*(N//3)+i)
-    for i in stars:
-        result.append(i*3)
-    return result
-print('\n'.join(star(N)))
+hano(N, 1, 3, 2)
+print(len(L1))
+print('\n'.join(L1))

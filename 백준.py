@@ -1,11 +1,11 @@
 N = int(input())
-L1 = list(range(666, 2666800))
-while True:
-    for i in L1:
-        if '666' in str(i):
-            N -= 1
-            if N == 0:
-                print(i)
-                break
-    if N == 0:
-        break
+L1 = []
+
+for i in range(N):
+    L1.append(int(input()))
+    while (i>0) and (L1[i] < L1[i+1]):
+        L1[i], L1[i-1] = L1[i-1], L1[i]
+        i -= 1
+
+for i in L1:
+    print(i)

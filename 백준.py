@@ -1,17 +1,31 @@
-N = int(input())
+N, M = map(int, input().split())
 L1 = []
 result = []
-data = tuple(map(int, input().split()))
-L1.append(data)
-result.append(1)
-for i in range(N-1):
-    data = tuple(map(int, input().split()))
+result_B = 0
+result_W = 0
+index = 0
+for _ in range(N):
+    data = tuple(input())
     L1.append(data)
-    result.append(1)
-    for j in range(len(L1)-1):
-        if L1[j][0] > data[0] and L1[j][1] > data[1]:
-            result[-1] += 1
-        elif L1[j][0] < data[0] and L1[j][1] < data[1]:
-            result[j] += 1
-for i in result:
-    print(i, end=" ")
+for k in range(N-7):
+    for l in range(0, M-7):
+        for _ in range(k, k+8): # 8x8 하나 읽기
+            for j in range(l, l+8, 2):
+                if L1[_][j] == "W":
+                    result_B += 1
+                    if L1[_][j+1] == "B":
+                        result_B += 1
+                    else:
+                        result_W += 1
+                if L1[_][j] == "B":
+                    result_W += 1
+                    if L1[_][j+1] == "W":
+                        result_W += 1
+                    else:
+                        result_B += 1
+            index = result_B
+            result_B = result_W
+            result_W = index
+        result.append(min(result_B, result_W))
+        result_B, result_W, index = 0, 0, 0
+print(f"{min(result)}")

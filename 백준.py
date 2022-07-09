@@ -1,11 +1,9 @@
+import sys
+
 N = int(input())
 L1 = []
 
 for i in range(N):
-    L1.append(int(input()))
-    while (i>0) and (L1[i] < L1[i+1]):
-        L1[i], L1[i-1] = L1[i-1], L1[i]
-        i -= 1
-
-for i in L1:
-    print(i)
+    L1.append(int(sys.stdin.readline()))
+for i in sorted(L1):
+    sys.stdout.write(str(i)+'\n')

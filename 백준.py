@@ -1,16 +1,13 @@
 import sys
 
-N = int(input())
-D1 = {}
-for i in list(map(int, sys.stdin.readline().split())):
-    if i in D1.keys():
-        D1[i] += 1
-    else:
-        D1[i] = 1
-M = int(input())
-L1 = map(int, sys.stdin.readline().split())
-for i in L1:
-    if i in D1.keys():
-        sys.stdout.write(f"{D1[i]}" + " ")
-    else:
-        sys.stdout.write("0" + " ")
+N, M = map(int, input().split())
+S1 = set()
+S2 = set()
+for i in range(N):
+    S1.add(sys.stdin.readline().rstrip())
+for i in range(M):
+    S2.add(sys.stdin.readline().rstrip())
+print(len(S1.intersection(S2)))
+result = sorted(S1.intersection(S2))
+for i in result:
+    sys.stdout.write(f"{i}" + "\n")

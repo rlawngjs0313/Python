@@ -1,10 +1,17 @@
-from math import log2
+import sys
 
-N = int(input())
-result = int(log2(N))
-if N == 1:
-    print(1)
-elif N == 2**result:
-    print(N)
-else:
-    print(2*(N%(2**result)))
+def gcd(M, N):
+    if M == N:
+        return M
+    elif M > N:
+        return gcd(M-N, N)
+    elif M < N:
+        return gcd(M, N-M)
+def lcm(M, N, gcd):
+    return abs(M*N) / gcd
+
+N, M = map(int, input().split())
+sys.setrecursionlimit(1000000)
+result = gcd(M, N)
+print(result)
+print(int(lcm(M, N, result)))

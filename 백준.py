@@ -1,27 +1,32 @@
 import sys
-N = int(sys.stdin.readline())
-L1 = []
-bl = False
+
+N = int(input())
+L1 = list(range(1, N+1))
+L2 = []
+result = []
+index = 0
 
 for i in range(N):
-    data = sys.stdin.readline().rstrip()
-    for j in data:
-        if j == "(":
-            L1.append(1)
-        elif j == ")":
-            if L1 == []:
-                sys.stdout.write("NO" + "\n")
-                bl = True
+    data = int(sys.stdin.readline())
+    if L2 == []:
+        while True:
+            L2.append(L1.pop(0))
+            result.append("+")
+            if L2[-1] == data:
+                index = L2.pop()
+                result.append("-")
                 break
-            else:
-                L1.pop()
-    if bl:
-        L1 = []
-        bl = False
-        continue
-    if L1 == []:
-        sys.stdout.write("YES" + "\n")
-    else:
-        sys.stdout.write("NO" + "\n")
-    L1 = []
-    bl = False
+    elif L2[-1] <= data:
+        while L2[-1] != data:
+            L2.append(L1.pop(0))
+            result.append("+")
+        index = L2.pop()
+        result.append("-")
+    elif L2[-1] > data:
+        result.clear()
+        result.append("NO")
+        for j in range(N-i-1):
+            sys.stdin.readline()
+        break
+for i in result:
+    sys.stdout.write(i + "\n")

@@ -1,7 +1,25 @@
-data = list(map(int, input().split()))
-if data == [1,2,3,4,5,6,7,8]:
-    print("ascending")
-elif data == [8,7,6,5,4,3,2,1]:
-    print("descending")
-else:
-    print("mixed")
+while True:
+    data = input()
+    index = len(data) // 2
+    result = ""
+    if len(data) % 2 == 0:
+        S1 = list(map(str, data[index:]))
+        S1.reverse()
+        for i in S1:
+            result += i
+        if data[:index] == result:
+            print("yes")
+            continue
+        else:
+            print("no")
+            continue
+    S1 = list(map(str, data[index:]))
+    S1.reverse()
+    for i in S1:
+        result += i
+    if data == '0':
+        break
+    if data[0:index+1] == result:
+        print("yes")
+    else:
+        print("no")

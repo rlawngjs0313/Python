@@ -1,14 +1,18 @@
-N, K = map(int, input().split())
-L1 = list(range(1, N+1))
-cnt = 0
-result = []
+import sys
 
-while len(L1) != 0:
-    cnt += 1
-    if cnt == K:
-        cnt = 0
-        result.append(L1.pop(0))
+N1 = [1, 0]
+result = [1, 1]
+index = [0,0]
+
+N = int(input())
+for i in range(N):
+    data = int(sys.stdin.readline())
+    if data == 0:
+        sys.stdout.write(f"{N1[0]} {N1[1]}" + "\n")
+    elif data == 1:
+        sys.stdout.write(f"{N1[1]} {N1[0]}" + "\n")
     else:
-        L1.append(L1.pop(0))
-
-print(str(result).replace('[', '<').replace(']', '>'))
+        for i in range(data-2):
+            result[0], result[1] = result[1], (result[0]+result[1])
+        sys.stdout.write(f"{result[0]} {result[1]}" + "\n")
+    result = [1, 1]

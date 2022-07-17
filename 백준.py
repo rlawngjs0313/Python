@@ -1,25 +1,10 @@
-while True:
-    data = input()
-    index = len(data) // 2
-    result = ""
-    if len(data) % 2 == 0:
-        S1 = list(map(str, data[index:]))
-        S1.reverse()
-        for i in S1:
-            result += i
-        if data[:index] == result:
-            print("yes")
-            continue
-        else:
-            print("no")
-            continue
-    S1 = list(map(str, data[index:]))
-    S1.reverse()
-    for i in S1:
-        result += i
-    if data == '0':
-        break
-    if data[0:index+1] == result:
-        print("yes")
-    else:
-        print("no")
+from math import log2
+
+N = int(input())
+result = int(log2(N))
+if N == 1:
+    print(1)
+elif N == 2**result:
+    print(N)
+else:
+    print(2*(N%(2**result)))

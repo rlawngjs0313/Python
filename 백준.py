@@ -1,12 +1,19 @@
-N = int(input())
-L1 = [0] * (N+1)
+data = input().split("-")
+result1 = 0
+result2 = 0
 
-for i in range(2, N+1):
-    L1[i] = L1[i-1] + 1
-
-    if i % 2 == 0:
-        L1[i] = min(L1[i], L1[i//2]+1)
-    if i % 3 == 0:
-        L1[i] = min(L1[i], L1[i//3]+1)
-
-print(L1[N])
+if len(data) == 1:
+    data = list(map(int, data[0].split("+")))
+    for i in data:
+        result1 += i
+    print(result1)
+else:
+    data1 = list(map(int, data[0].split("+")))
+    for i in data1:
+        result1 += i
+    for i in range(len(data[1:])):
+        data[i+1] = sum(list(map(int, data[i+1].split("+"))))
+    result2 = sum(data[1:])
+    data.clear()
+    data.append(str(result1-result2))
+    print(data[0])

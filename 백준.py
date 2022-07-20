@@ -1,58 +1,43 @@
-from collections import deque
+import heapq
 import sys
-sys.setrecursionlimit(1000000)
 
-def BFS(list, nullspace):
-    queue = deque(list)
-    index = len(list) + nullspace
-    end = M*N
-    cnt = 0
+T = int(sys.stdin.readline())
 
-    while queue:
-        if index == end:
-            return cnt
-        for _ in range(len(queue)):
-            y, x = queue.popleft()
-            for i in ([y, x+1], [y, x-1], [y+1, x], [y-1, x]):
-                if (i[1] < 0 or i[1] >= M) or (i[0] < 0 or i[0] >= N):
-                    continue
-                if graph[i[0]][i[1]] == -1 or graph[i[0]][i[1]] == 1:
-                    continue
-                graph[i[0]][i[1]] = 1
-                index += 1
-                queue.append(i)
-        cnt += 1
-    return cnt
+for i in range(T):
+    k = int(sys.stdin.readline())
+    min_heap, max_heap = [], []
+    visited = [False] * k # 삭제한 값인지 판별하기 위해
 
+    for j in range(k):
+        com, num = sys.stdin.readline().split()
 
-M, N = map(int, sys.stdin.readline().split())
-graph = []
-L1 = []
-nullspace = 0
-AllFull = False
+        if com == 'I':
+            heapq.heappush(min_heap, (int(num), j))
+            heapq.heappush(max_heap, (-int(num), j))
+            visited[j] = True
 
-for i in range(N):
-    data = list(map(int, sys.stdin.readline().split()))
-    if 0 not in data and -1 not in data:
-        AllFull = True
+        else:
+            if num == '1':
+                while max_heap and not visited[max_heap[0][1]]:
+                    heapq.heappop(max_heap)
+                if max_heap:
+                    visited[max_heap[0][1]] = False
+                    heapq.heappop(max_heap)
+            else:
+                while min_heap and not visited[min_heap[0][1]]:
+                    heapq.heappop(min_heap)
+                if min_heap:
+                    visited[min_heap[0][1]] = False
+                    heapq.heappop(min_heap)
+
+    while min_heap and not visited[min_heap[0][1]]:
+        heapq.heappop(min_heap)
+    while max_heap and not visited[max_heap[0][1]]:
+        heapq.heappop(max_heap)
+
+    if not min_heap or not max_heap:
+        print("EMPTY")
     else:
-        allFull = False
-    graph.append(data)
-
-for i in range(len(graph)):
-    for j in range(len(graph[i])):
-        if graph[i][j] == 1:
-            L1.append([i, j])
-        elif graph[i][j] == -1:
-            nullspace += 1
-
-if AllFull:
-    print(0)
-else:
-    result = BFS(L1, nullspace)
-    for i in graph:
-        if 0 in i:
-            print(-1)
-            break
-    else:
-        print(result)
+        a = -max_heap[0][0]
+        b = min_heap[0][0]
+        print(f"{a} {b}")

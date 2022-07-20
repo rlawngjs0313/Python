@@ -1,43 +1,38 @@
-import heapq
 import sys
+from collections import deque
+sys.setrecursionlimit(1000000)
 
-T = int(sys.stdin.readline())
+def BFS(node):
+    global cnt
+    global graph
+    cnt += 1
+    visited = [node]
+    queue = deque()
+    queue.append(node)
 
-for i in range(T):
-    k = int(sys.stdin.readline())
-    min_heap, max_heap = [], []
-    visited = [False] * k # 삭제한 값인지 판별하기 위해
+    while queue:
+        A = queue.popleft()
+        for i in range(len(graph[A])):
+            if graph[A][i] not in visited:
+                visited.append(graph[A][i])
+                queue.append(graph[A][i])
 
-    for j in range(k):
-        com, num = sys.stdin.readline().split()
+    for i in visited:
+        L1.remove(i)
+    if L1:
+        BFS(L1[0])
+            
+        
 
-        if com == 'I':
-            heapq.heappush(min_heap, (int(num), j))
-            heapq.heappush(max_heap, (-int(num), j))
-            visited[j] = True
+N, M = map(int, sys.stdin.readline().split())
+graph = [[] for _ in range(N+1)]
+cnt = 0
+L1 = list(range(1, N+1))
 
-        else:
-            if num == '1':
-                while max_heap and not visited[max_heap[0][1]]:
-                    heapq.heappop(max_heap)
-                if max_heap:
-                    visited[max_heap[0][1]] = False
-                    heapq.heappop(max_heap)
-            else:
-                while min_heap and not visited[min_heap[0][1]]:
-                    heapq.heappop(min_heap)
-                if min_heap:
-                    visited[min_heap[0][1]] = False
-                    heapq.heappop(min_heap)
+for i in range(M):
+    data = list(map(int, sys.stdin.readline().split()))
+    graph[data[0]].append(data[1])
+    graph[data[1]].append(data[0])
 
-    while min_heap and not visited[min_heap[0][1]]:
-        heapq.heappop(min_heap)
-    while max_heap and not visited[max_heap[0][1]]:
-        heapq.heappop(max_heap)
-
-    if not min_heap or not max_heap:
-        print("EMPTY")
-    else:
-        a = -max_heap[0][0]
-        b = min_heap[0][0]
-        print(f"{a} {b}")
+BFS(1)
+print(cnt)

@@ -1,38 +1,26 @@
 import sys
-from collections import deque
-sys.setrecursionlimit(1000000)
 
-def BFS(node):
-    global cnt
-    global graph
-    cnt += 1
-    visited = [node]
-    queue = deque()
-    queue.append(node)
-
-    while queue:
-        A = queue.popleft()
-        for i in range(len(graph[A])):
-            if graph[A][i] not in visited:
-                visited.append(graph[A][i])
-                queue.append(graph[A][i])
-
-    for i in visited:
-        L1.remove(i)
-    if L1:
-        BFS(L1[0])
-            
-        
-
-N, M = map(int, sys.stdin.readline().split())
-graph = [[] for _ in range(N+1)]
-cnt = 0
-L1 = list(range(1, N+1))
+S = set()
+M = int(sys.stdin.readline())
 
 for i in range(M):
-    data = list(map(int, sys.stdin.readline().split()))
-    graph[data[0]].append(data[1])
-    graph[data[1]].append(data[0])
-
-BFS(1)
-print(cnt)
+    data = list(sys.stdin.readline().split())
+    if data[0] == "add":
+        S.add(int(data[1]))
+    if data[0] == "remove":
+        if int(data[1]) in S:
+            S.remove(int(data[1]))
+    if data[0] == "check":
+        if int(data[1]) in S:
+            sys.stdout.write("1" + '\n')
+        else:
+            sys.stdout.write("0" + '\n')
+    if data[0] == "toggle":
+        if int(data[1]) in S:
+            S.remove(int(data[1]))
+        else:
+            S.add(int(data[1]))
+    if data[0] == "all":
+        S = set(range(1, 21))
+    if data[0] == "empty":
+        S = set()

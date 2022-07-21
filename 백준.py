@@ -1,13 +1,14 @@
 import sys
 
-N = int(sys.stdin.readline())
-P = list(map(int, sys.stdin.readline().split()))
-P2 = sorted(P)
-result = 0
+N, M = map(int, sys.stdin.readline().split())
+data = list(map(int, sys.stdin.readline().split()))
+L1 = [0]
 temp = 0
 
-for i in range(len(P2)):
-    temp = P2[i] + temp
-    result += temp
+for i in data:
+    temp += i
+    L1.append(temp)
 
-sys.stdout.write(str(result))
+for i in range(M):
+    index = list(map(int, sys.stdin.readline().split()))
+    sys.stdout.write(str(L1[index[1]] - L1[index[0]-1]) + '\n')

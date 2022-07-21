@@ -1,19 +1,17 @@
-import sys
-sys.setrecursionlimit(1000000)
+N = int(input())
+M = int(input())
+S = input()
+result, i, cnt = 0, 0, 0
 
-N = int(sys.stdin.readline())
-M = int(sys.stdin.readline())
-S = sys.stdin.readline().rstrip()
-word = "IO"*N + "I"
-index = 1
-cnt = 0
-
-while True:
-    result = S.find(word, index-1)
-    if result != -1:
+while i < (M - 1):
+    if S[i:i+3] == 'IOI':
+        i += 2
         cnt += 1
-        index = result + 3
+        if cnt == N:
+            result += 1
+            cnt -= 1
     else:
-        break
+        i += 1
+        cnt = 0
 
-print(cnt)
+print(result)

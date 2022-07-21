@@ -1,26 +1,31 @@
 import sys
+sys.setrecursionlimit(1000000)
 
-S = set()
-M = int(sys.stdin.readline())
+N = int(sys.stdin.readline())
 
-for i in range(M):
-    data = list(sys.stdin.readline().split())
-    if data[0] == "add":
-        S.add(int(data[1]))
-    if data[0] == "remove":
-        if int(data[1]) in S:
-            S.remove(int(data[1]))
-    if data[0] == "check":
-        if int(data[1]) in S:
-            sys.stdout.write("1" + '\n')
+for i in range(N):
+    cnt = 0
+    p = sys.stdin.readline().rstrip()
+    n = int(sys.stdin.readline())
+    if n == 0:
+        sys.stdin.readline()
+        data = []
+    else:
+        data = list(map(int, sys.stdin.readline().rstrip().rstrip("]").lstrip("[").split(",")))
+    for j in p:
+        if j == "R":
+            cnt += 1
+        if j == "D":
+            if data == []:
+                sys.stdout.write("error" + '\n')
+                break
+            else:
+                if cnt == 0 or cnt % 2 == 0:
+                    data.pop(0)
+                else:
+                    data.pop(-1)
+    else:
+        if cnt == 0 or cnt % 2 == 0:
+            sys.stdout.write(str(data).replace(" ", "") + '\n')
         else:
-            sys.stdout.write("0" + '\n')
-    if data[0] == "toggle":
-        if int(data[1]) in S:
-            S.remove(int(data[1]))
-        else:
-            S.add(int(data[1]))
-    if data[0] == "all":
-        S = set(range(1, 21))
-    if data[0] == "empty":
-        S = set()
+            sys.stdout.write(str(list(reversed(data))).replace(" ", "") + '\n')

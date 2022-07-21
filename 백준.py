@@ -1,17 +1,13 @@
-N = int(input())
-M = int(input())
-S = input()
-result, i, cnt = 0, 0, 0
+import sys
 
-while i < (M - 1):
-    if S[i:i+3] == 'IOI':
-        i += 2
-        cnt += 1
-        if cnt == N:
-            result += 1
-            cnt -= 1
-    else:
-        i += 1
-        cnt = 0
+N = int(sys.stdin.readline())
+P = list(map(int, sys.stdin.readline().split()))
+P2 = sorted(P)
+result = 0
+temp = 0
 
-print(result)
+for i in range(len(P2)):
+    temp = P2[i] + temp
+    result += temp
+
+sys.stdout.write(str(result))

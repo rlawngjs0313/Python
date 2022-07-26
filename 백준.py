@@ -1,50 +1,20 @@
 import sys
 
-data = sys.stdin.readline().rstrip()
-result = []
-temp = ""
-isTag = False
+data = list(map(str, sys.stdin.readline().rstrip()))
+L1 = []
+result = 0
+isLaser = False
 
-for i in data:
-    if isTag:
-        if i == ">":
-            temp += i
-            result.append(temp)
-            isTag = False
-            temp = ""
-            continue
-        else:
-            temp += i
-    elif i == "<":
-        if temp:
-            result.append(temp)
-            temp = "<"
-            isTag = True
-            continue
-        else:
-            temp += i
-            isTag = True
-    elif i == " " and temp:
-        result.append(temp)
-        temp = ""
+for i in range(len(data)):
+    if isLaser:
+        isLaser = False
         continue
-    else:
-        temp += i
-if temp:
-    result.append(temp)
-
-for i in range(len(result)):
-    if "<" in result[i]:
-        sys.stdout.write(str(result[i]))
-        isTag = True
-    else:
-        temp = list(result[i])
-        temp.reverse()
-        if isTag:
-            sys.stdout.write(str(temp).replace("[", "").replace("]", "").replace(", ", "").replace("'", ""))
-            isTag = False
-        else:
-            if i == 0:
-                sys.stdout.write(str(temp).replace("[", "").replace("]", "").replace(", ", "").replace("'", ""))
-            else:
-                sys.stdout.write(" " + str(temp).replace("[", "").replace("]", "").replace(", ", "").replace("'", ""))
+    if data[i] == "(" and data[i+1] == ")":
+        result += len(L1)
+        isLaser = True
+    elif data[i] == "(":
+        L1.append(data[i])
+    elif data[i] == ")":
+        L1.pop()
+        result += 1
+print(result)

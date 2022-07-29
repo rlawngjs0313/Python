@@ -1,30 +1,24 @@
 import sys
 
-N = int(sys.stdin.readline())
-data = sys.stdin.readline().rstrip()
+data = list(input())
 L1 = []
-L2 = []
-for i in range(N):
-    L2.append(float(sys.stdin.readline()))
-
 for i in data:
-    if i == "*":
-        A = float(L1.pop())
-        B = float(L1.pop())
-        L1.append(B*A)
-    elif i == "/":
-        A = float(L1.pop())
-        B = float(L1.pop())
-        L1.append(B/A)
-    elif i == "+":
-        A = float(L1.pop())
-        B = float(L1.pop())
-        L1.append(B+A)
-    elif i == "-":
-        A = float(L1.pop())
-        B = float(L1.pop())
-        L1.append(B-A)
+    if i.isalpha():
+        sys.stdout.write(i)
     else:
-        L1.append(L2[ord(i)-ord("A")])
-
-print(f"{L1[0]:0.2f}")
+        if i == '(':
+            L1.append(i)
+        elif i == '*' or i == '/':
+            while L1 and (L1[-1] == '*' or L1[-1] =='/'):
+                sys.stdout.write(L1.pop())
+            L1.append(i)
+        elif i == '+' or i == '-':
+            while L1 and L1[-1] != '(':
+                sys.stdout.write(L1.pop())
+            L1.append(i)
+        elif i == ')':
+            while L1 and L1[-1] != '(':
+                sys.stdout.write(L1.pop())
+            L1.pop()
+while L1 :
+    sys.stdout.write(L1.pop())

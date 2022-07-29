@@ -1,20 +1,30 @@
 import sys
 
 N = int(sys.stdin.readline())
-data = list(map(int, sys.stdin.readline().split()))
-result = [-1] * N
+data = sys.stdin.readline().rstrip()
 L1 = []
+L2 = []
+for i in range(N):
+    L2.append(float(sys.stdin.readline()))
 
-for i in range(len(data)-1):
-    if data[i] < data[i+1]:
-        result[i] = data[i+1]
-        while L1:
-            index = L1.pop()
-            if data[index] < data[i+1]:
-                result[index] = data[i+1]
-            else:
-                L1.append(index)
-                break
+for i in data:
+    if i == "*":
+        A = float(L1.pop())
+        B = float(L1.pop())
+        L1.append(B*A)
+    elif i == "/":
+        A = float(L1.pop())
+        B = float(L1.pop())
+        L1.append(B/A)
+    elif i == "+":
+        A = float(L1.pop())
+        B = float(L1.pop())
+        L1.append(B+A)
+    elif i == "-":
+        A = float(L1.pop())
+        B = float(L1.pop())
+        L1.append(B-A)
     else:
-        L1.append(i)
-print(*result)
+        L1.append(L2[ord(i)-ord("A")])
+
+print(f"{L1[0]:0.2f}")

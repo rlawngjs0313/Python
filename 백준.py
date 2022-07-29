@@ -1,12 +1,20 @@
-N = int(input())
-numbers = list(map(int, input().split()))
+import sys
 
-stack = []
-answer =[-1] * N
+N = int(sys.stdin.readline())
+data = list(map(int, sys.stdin.readline().split()))
+result = [-1] * N
+L1 = []
 
-for i in range(N):
-    while stack and numbers[stack[-1]] < numbers[i]:
-        answer[stack.pop()] = numbers[i]
-    stack.append(i)
-
-print(*answer)
+for i in range(len(data)-1):
+    if data[i] < data[i+1]:
+        result[i] = data[i+1]
+        while L1:
+            index = L1.pop()
+            if data[index] < data[i+1]:
+                result[index] = data[i+1]
+            else:
+                L1.append(index)
+                break
+    else:
+        L1.append(i)
+print(*result)

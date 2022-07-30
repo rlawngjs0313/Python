@@ -1,18 +1,19 @@
 import sys
 
-T = int(sys.stdin.readline())
+L1 = [False]+[False]+[True]*(999999)
 
-for i in range(T):
-    A, B = map(int, sys.stdin.readline().split())
-    A, B = max(A, B), min(A, B)
-    temp = A*B
-    if B == 1:
-        sys.stdout.write(str(A) + '\n')
+for i in range(1000):
+    if L1[i] == True:
+        for j in range(i*2, len(L1)-1, i):
+            L1[j] = False
+
+while True:
+    n = int(sys.stdin.readline())
+    index = 0
+    if n == 0:
+        break
     else:
-        while True:
-            if A % B == 0:
-                sys.stdout.write(str(int(temp/B)) + '\n')
+        for i in range(3, 1000001):
+            if L1[i] and L1[n-i]:
+                sys.stdout.write(f"{n} = {i} + {n-i}" + '\n')
                 break
-            else:
-                A %= B
-                A, B = max(A, B), min(A, B)

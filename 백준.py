@@ -1,12 +1,16 @@
-import sys
-
-def solution(N, M):
-    cnt = 0
-    while N != 0:
-        N = N//M
-        cnt += N
-    return cnt
-
-n, m = map(int, sys.stdin.readline().split())
-
-print(min(solution(n, 2) - solution(m, 2) - solution(n-m, 2), solution(n, 5) - solution(m, 5) - solution(n-m, 5)))
+T = int(input())						
+for i in range(T) :
+    x,y = map(int,input().split())
+    d = y - x
+    num = 1
+    while True :
+        if num**2 <= d < (num+1)**2 :
+            break
+        else:
+            num += 1
+    if num**2 == d :
+        print((num*2)-1)
+    elif num**2 < d <= num**2 + num :
+        print(num*2)
+    else :
+        print((num*2)+1)

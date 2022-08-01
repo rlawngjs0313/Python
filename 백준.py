@@ -1,4 +1,4 @@
 import sys
 
-data = "0b" + sys.stdin.readline().rstrip()
-print(oct(int(data, 2)).replace("0o", ""))
+data = "0o" + sys.stdin.readline().rstrip()
+print(bin(int(data, 8)).replace("0b", ""))

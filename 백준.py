@@ -1,14 +1,13 @@
 import sys
-sys.setrecursionlimit(1000000)
 
-def solution(n):
-    if n == 1: return 1
-    elif n == 2: return 2
-    elif n == 3: return 4
-    else: return solution(n-1) + solution(n-2) + solution(n-3)
-
-T = int(sys.stdin.readline())
-
-for i in range(T):
-    n = int(sys.stdin.readline())
-    sys.stdout.write(str(solution(n)) + '\n')
+n = int(sys.stdin.readline())
+S = 1
+L = 2
+cnt = 2
+if n < 3:
+    sys.stdout.write(str(n))
+else:
+    while cnt < n:
+        S, L = L, S+L
+        cnt += 1
+    sys.stdout.write(str(L % 10007))

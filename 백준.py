@@ -1,13 +1,15 @@
 import sys
 
 n = int(sys.stdin.readline())
-S = 1
-L = 2
+queue = [1, ]
 cnt = 2
-if n < 3:
-    sys.stdout.write(str(n))
-else:
-    while cnt < n:
-        S, L = L, S+L
-        cnt += 1
-    sys.stdout.write(str(L % 10007))
+
+while n-1:
+    if cnt % 2 == 0:
+        temp = 2
+    else:
+        temp = 1
+    queue.append(sum(queue)+temp)
+    n -= 1
+    cnt += 1
+print(queue.pop() % 10007)

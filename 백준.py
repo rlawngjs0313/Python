@@ -1,15 +1,20 @@
 import sys
 
-n = int(sys.stdin.readline())
-queue = [1, ]
-cnt = 2
+N = int(sys.stdin.readline())
+result = 0
+sequenceQueue = []
 
-while n-1:
-    if cnt % 2 == 0:
-        temp = 2
-    else:
-        temp = 1
-    queue.append(sum(queue)+temp)
-    n -= 1
-    cnt += 1
-print(queue.pop() % 10007)
+for i in range(N):
+    data = list(map(int, sys.stdin.readline().split()))
+    dataSequence = data.index(min(data))
+    dataCost = data[dataSequence]
+    if sequenceQueue != []:
+        if sequenceQueue.pop() == dataSequence:
+            tempData = data[:]
+            tempData.pop(dataSequence)
+            dataSequence = data.index(min(tempData))
+            dataCost = data[dataSequence]
+    result += dataCost
+    sequenceQueue.append(dataSequence)
+
+print(result)

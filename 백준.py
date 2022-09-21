@@ -1,13 +1,9 @@
 import sys
+from collections import deque
 
-N = int(sys.stdin.readline())
-data = list(map(int, sys.stdin.readline().split()))
-max = data[0]
+graph = []
+queue = deque()
+visit = []
+for i in range(6):
+    graph.append(list(map(int, sys.stdin.readline().split())))
 
-for i in range(1, N):
-    if (max + data[0]) >= data[i]:
-        max += data[0]
-    else:
-        max = data[i]
-
-print(max)

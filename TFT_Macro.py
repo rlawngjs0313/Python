@@ -13,14 +13,13 @@ while True:
     while True:
         accept = pa.locateCenterOnScreen('macro/matching_okay.png')
         if accept:
+            pa.click(accept) # 매칭
+        loading = pa.locateCenterOnScreen('macro/loading.png')
+        if loading:
             break
-    pa.click(accept) # 매칭
-    time.sleep(610)
+    time.sleep(630)
     while True:
         L = pa.locateCenterOnScreen('macro/esc.png')
-        if L:
-            pa.click(L)
-        L = pa.locateCenterOnScreen('macro/esc2.png')
         if L:
             pa.click(L)
         one = pa.locateCenterOnScreen('macro/surrender.png')
@@ -37,5 +36,5 @@ while True:
         if reset:
             pa.click(reset)
             break #리셋
-    match, accept, timer, reset, one, two, L = 0, 0, 0, 0, 0, 0, 0
+    match, accept, timer, reset, one, two, L, loading = 0, 0, 0, 0, 0, 0, 0, 0
     sys.stdout.write(f"{cnt}번 \n")

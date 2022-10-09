@@ -20,7 +20,10 @@ while True:
         L = pa.locateCenterOnScreen('macro/esc.png')
         if L:
             pa.click(L)
-            one = pa.locateCenterOnScreen('macro/surrender.png')
+        L = pa.locateCenterOnScreen('macro/esc2.png')
+        if L:
+            pa.click(L)
+        one = pa.locateCenterOnScreen('macro/surrender.png')
         if one:
             pa.click(one)
             break
@@ -34,5 +37,5 @@ while True:
         if reset:
             pa.click(reset)
             break #리셋
-    match, accept, timer, reset, one, two = 0, 0, 0, 0, 0, 0
+    match, accept, timer, reset, one, two, L = 0, 0, 0, 0, 0, 0, 0
     sys.stdout.write(f"{cnt}번 \n")

@@ -1,6 +1,17 @@
 import sys
 import time
 import pyautogui as pa
+import pydirectinput
+import os
+from win32comext.shell import shell
+
+ASADMIN = 'asadmin'
+
+print(sys.argv)
+if sys.argv[-1] != ASADMIN:
+    script = os.path.abspath(sys.argv[0])
+    params = ' '.join([script] + sys.argv[1:] + [ASADMIN])
+    shell.ShellExecuteEx(lpVerb='runas', lpFile=sys.executable, lpParameters=params)
 
 cnt = 0
 
@@ -21,15 +32,15 @@ while True:
     while True:
         L = pa.locateCenterOnScreen('macro/esc.png')
         if L:
-            pa.click(L)
+            pydirectinput.click(L[0], L[1])
         one = pa.locateCenterOnScreen('macro/surrender.png')
         if one:
-            pa.click(one)
+            pydirectinput.click(one[0], one[1])
             break
     while True:
         two = pa.locateCenterOnScreen('macro/surrender_okay.png')
         if two:
-            pa.click(two) 
+            pydirectinput.click(two[0], two[1]) 
             break #서렌
     while True:
         reset = pa.locateCenterOnScreen('macro/reset.png')

@@ -1,13 +1,10 @@
 import sys
+# 2668번 숫자 고르기 / 1부터 사이클을 돌면서 N번까지 자기 자신의 수로 안간다면 X, 간다면(순환한다면) set에 추가
+N = int(input())
+L1 = [0 for _ in range(N+1)]
 
-n = int(input())
-data = []
+for i in range(1, N+1):
+    L1[i] = int(input())
 
-for i in range(n):
-    temp = list(map(str, sys.stdin.readline().split()))
-    temp[1:] = list(map(int, temp[1:]))
-    data.append(temp)
-
-data.sort(key = lambda x : (x[3], x[2], x[1]))
-print(data[-1][0])
-print(data[0][0])
+while True:
+    L1[1]

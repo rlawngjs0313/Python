@@ -1,18 +1,18 @@
 import sys
 
-N, K = map(int, sys.stdin.readline().split())
-result, cnt = 0, 1
+N = int(input())
+result = 0
+init = [0,0]
 L1 = []
 
 for i in range(N):
-    L1.append(int(sys.stdin.readline()))
+    L1.append(list(map(int, sys.stdin.readline().split())))
 
-while True:
-    if K == 0:
-        break
-    elif K % L1[N-cnt] != K:
-        result += K // L1[N-cnt]
-        K %= L1[N-cnt]
-    cnt += 1
+L1.sort(key= lambda x: (x[1], x[0]))
+
+for i in L1:
+    if i[0] >= init[1]:
+        result += 1
+        init = i[:]
 
 print(result)

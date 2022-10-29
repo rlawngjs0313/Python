@@ -1,26 +1,51 @@
 import sys
-import numpy as np
-
 
 T = int(sys.stdin.readline())
 
-for i in range(T):
-    U_D = [["w", "w", "w"] for _ in range(3)]
-    D_U = [["y", "y", "y"] for _ in range(3)]
-    F_B = [["r", "r", "r"] for _ in range(3)]
-    B_F = [["o", "o", "o"] for _ in range(3)]
-    L_R = [["g", "g", "g"] for _ in range(3)]
-    R_L = [["b", "b", "b"] for _ in range(3)]
-
+for _ in range(T):
     n = int(sys.stdin.readline())
-    execution = list(map(str, sys.stdin.readline().split()))
-    for j in execution:
-        if j == "U-":
-            F_B[0][:], R_L[0][:], B_F[0][:], L_R[0][:], U_D[:][:
-                                                               ] = L_R[0][:], F_B[0][:], R_L[0][:], B_F[0][:]
-        elif j == "U+":
-            F_B[0][:], L_R[0][:], B_F[0][:], R_L[0][:] = R_L[0][:], B_F[0][:], L_R[0][:], F_B[0][:]
-        elif j == "D-":
-            F_B[2][:], R_L[2][:], B_F[2][:], L_R[2][:] = L_R[2][:], F_B[2][:], R_L[2][:], B_F[2][:]
-        elif j == "D+":
-            F_B[2][:], L_R[2][:], B_F[2][:], R_L[2][:] = R_L[2][:], B_F[2][:], L_R[2][:], F_B[2][:]
+    execute = list(map(str, sys.stdin.readline().split()))
+    cube = [[["g", "g", "g"] for _ in range(3)], 
+            [["r", 'r', 'r'] for _ in range(3)], 
+            [['b', 'b', 'b'] for _ in range(3)], 
+            [['o', 'o', 'o'] for _ in range(3)], 
+            [['w', 'w', 'w'] for _ in range(3)], 
+            [['y', 'y', 'y'] for _ in range(3)]]
+    for i in execute:
+        if i == "U-":
+            cube[0][0][:], cube[1][0][:], cube[2][0][:], cube[3][0][:] = cube[3][0][:], cube[0][0][:], cube[1][0][:], cube[2][0][:]
+            cube[4][0][0], cube[4][0][1], cube[4][0][2], cube[4][1][0], cube[4][1][2], cube[4][2][0], cube[4][2][1], cube[4][2][2] = cube[4][0][2], cube[4][1][2], cube[4][2][2], cube[4][0][1], cube[4][2][1], cube[4][0][0], cube[4][1][0], cube[4][2][0]
+        elif i == "U+":
+            cube[0][0][:], cube[1][0][:], cube[2][0][:], cube[3][0][:] = cube[1][0][:], cube[2][0][:], cube[3][0][:], cube[0][0][:]
+            cube[4][0][0], cube[4][0][1], cube[4][0][2], cube[4][1][0], cube[4][1][2], cube[4][2][0], cube[4][2][1], cube[4][2][2] = cube[4][2][0], cube[4][1][0], cube[4][0][0], cube[4][2][1], cube[4][0][1], cube[4][2][2], cube[4][1][2], cube[4][0][2]
+        elif i == "D-":
+            cube[0][2][:], cube[1][2][:], cube[2][2][:], cube[3][2][:] = cube[1][2][:], cube[2][2][:], cube[3][2][:], cube[0][2][:]
+            cube[5][0][0], cube[5][0][1], cube[5][0][2], cube[5][1][0], cube[5][1][2], cube[5][2][0], cube[5][2][1], cube[5][2][2] = cube[5][0][2], cube[5][1][2], cube[5][2][2], cube[5][0][1], cube[5][2][1], cube[5][0][0], cube[5][1][0], cube[5][2][0]
+        elif i == "D+":
+            cube[0][2][:], cube[1][2][:], cube[2][2][:], cube[3][2][:] = cube[3][2][:], cube[0][2][:], cube[1][2][:], cube[2][2][:]
+            cube[5][0][0], cube[5][0][1], cube[5][0][2], cube[5][1][0], cube[5][1][2], cube[5][2][0], cube[5][2][1], cube[5][2][2] = cube[5][2][0], cube[5][1][0], cube[5][0][0], cube[5][2][1], cube[5][0][1], cube[5][2][2], cube[5][1][2], cube[5][0][2]
+        elif i == "F-":
+            cube[0][0][2], cube[0][1][2], cube[0][2][2], cube[5][0][0], cube[5][0][1], cube[5][0][2], cube[2][0][0], cube[2][1][0], cube[2][2][0], cube[4][2][0], cube[4][2][1], cube[4][2][2] = cube[4][2][2], cube[4][2][1], cube[4][2][0], cube[0][0][2], cube[0][1][2], cube[0][2][2], cube[5][0][2], cube[5][0][1], cube[5][0][0], cube[2][0][0], cube[2][1][0], cube[2][2][0]
+            cube[1][0][0], cube[1][0][1], cube[1][0][2], cube[1][1][0], cube[1][1][2], cube[1][2][0], cube[1][2][1], cube[1][2][2] = cube[1][0][2], cube[1][1][2], cube[1][2][2], cube[1][0][1], cube[1][2][1], cube[1][0][0], cube[1][1][0], cube[1][2][0]
+        elif i == "F+":
+            cube[0][0][2], cube[0][1][2], cube[0][2][2], cube[4][2][0], cube[4][2][1], cube[4][2][2],  cube[2][0][0], cube[2][1][0], cube[2][2][0], cube[5][0][0], cube[5][0][1], cube[5][0][2] = cube[5][0][0], cube[5][0][1], cube[5][0][2], cube[0][2][2], cube[0][1][2], cube[0][0][2], cube[4][2][0], cube[4][2][1], cube[4][2][2], cube[2][2][0], cube[2][1][0], cube[2][0][0]
+            cube[1][0][0], cube[1][0][1], cube[1][0][2], cube[1][1][0], cube[1][1][2], cube[1][2][0], cube[1][2][1], cube[1][2][2] = cube[1][2][0], cube[1][1][0], cube[1][0][0], cube[1][2][1], cube[1][0][1], cube[1][2][2], cube[1][1][2], cube[1][0][2]
+        elif i == "B-":
+            cube[0][0][0], cube[0][1][0], cube[0][2][0], cube[4][0][0], cube[4][0][1], cube[4][0][2], cube[2][0][2], cube[2][1][2], cube[2][2][2], cube[5][2][0], cube[5][2][1], cube[5][2][2] = cube[5][2][0], cube[5][2][1], cube[5][2][2], cube[0][2][0], cube[0][1][0], cube[0][0][0], cube[4][0][0], cube[4][0][1], cube[4][0][2], cube[2][2][2], cube[2][1][2], cube[2][0][2]
+            cube[3][0][0], cube[3][0][1], cube[3][0][2], cube[3][1][0], cube[3][1][2], cube[3][2][0], cube[3][2][1], cube[3][2][2] = cube[3][0][2], cube[3][1][2], cube[3][2][2], cube[3][0][1], cube[3][2][1], cube[3][0][0], cube[3][1][0], cube[3][2][0]
+        elif i == "B+":
+            cube[0][0][0], cube[0][1][0], cube[0][2][0], cube[5][2][0], cube[5][2][1], cube[5][2][2], cube[2][0][2], cube[2][1][2], cube[2][2][2], cube[4][0][0], cube[4][0][1], cube[4][0][2] = cube[4][0][2], cube[4][0][1], cube[4][0][0], cube[0][0][0], cube[0][1][0], cube[0][2][0], cube[5][2][2], cube[5][2][1], cube[5][2][0], cube[2][0][2], cube[2][1][2], cube[2][2][2]
+            cube[3][0][0], cube[3][0][1], cube[3][0][2], cube[3][1][0], cube[3][1][2], cube[3][2][0], cube[3][2][1], cube[3][2][2] = cube[3][2][0], cube[3][1][0], cube[3][0][0], cube[3][2][1], cube[3][0][1], cube[3][2][2], cube[3][1][2], cube[3][0][2]
+        elif i == "L-":
+            cube[1][0][0], cube[1][1][0], cube[1][2][0], cube[3][0][2], cube[3][1][2], cube[3][2][2], cube[4][0][0], cube[4][1][0], cube[4][2][0], cube[5][0][0], cube[5][1][0], cube[5][2][0] = cube[5][0][0], cube[5][1][0], cube[5][2][0], cube[4][2][0], cube[4][1][0], cube[4][0][0], cube[1][0][0], cube[1][1][0], cube[1][2][0], cube[3][2][2], cube[3][1][2], cube[3][0][2]
+            cube[0][0][0], cube[0][0][1], cube[0][0][2], cube[0][1][0], cube[0][1][2], cube[0][2][0], cube[0][2][1], cube[0][2][2] = cube[0][0][2], cube[0][1][2], cube[0][2][2], cube[0][0][1], cube[0][2][1], cube[0][0][0], cube[0][1][0], cube[0][2][0]
+        elif i == "L+":
+            cube[1][0][0], cube[1][1][0], cube[1][2][0], cube[4][0][0], cube[4][1][0], cube[4][2][0], cube[5][0][0], cube[5][1][0], cube[5][2][0], cube[3][0][2], cube[3][1][2], cube[3][2][2] = cube[4][0][0], cube[4][1][0], cube[4][2][0], cube[3][2][2], cube[3][1][2], cube[3][0][2], cube[1][0][0], cube[1][1][0], cube[1][2][0], cube[5][2][0], cube[5][1][0], cube[5][0][0]
+            cube[0][0][0], cube[0][0][1], cube[0][0][2], cube[0][1][0], cube[0][1][2], cube[0][2][0], cube[0][2][1], cube[0][2][2] = cube[0][2][0], cube[0][1][0], cube[0][0][0], cube[0][2][1], cube[0][0][1], cube[0][2][2], cube[0][1][2], cube[0][0][2]
+        elif i == "R-": 
+            cube[1][0][2], cube[1][1][2], cube[1][2][2], cube[3][0][0], cube[3][1][0], cube[3][2][0], cube[4][0][2], cube[4][1][2], cube[4][2][2], cube[5][0][2], cube[5][1][2], cube[5][2][2] = cube[4][0][2], cube[4][1][2], cube[4][2][2], cube[5][2][2], cube[5][1][2], cube[5][0][2], cube[3][2][0], cube[3][1][0], cube[3][0][0], cube[1][0][2], cube[1][1][2], cube[1][2][2]
+            cube[2][0][0], cube[2][0][1], cube[2][0][2], cube[2][1][0], cube[2][1][2], cube[2][2][0], cube[2][2][1], cube[2][2][2] = cube[2][0][2], cube[2][1][2], cube[2][2][2], cube[2][0][1], cube[2][2][1], cube[2][0][0], cube[2][1][0], cube[2][2][0]
+        elif i == "R+":
+            cube[1][0][2], cube[1][1][2], cube[1][2][2], cube[3][0][0], cube[3][1][0], cube[3][2][0], cube[4][0][2], cube[4][1][2], cube[4][2][2], cube[5][0][2], cube[5][1][2], cube[5][2][2] = cube[5][0][2], cube[5][1][2], cube[5][2][2], cube[4][2][2], cube[4][1][2], cube[4][0][2], cube[1][0][2], cube[1][1][2], cube[1][2][2], cube[3][2][0], cube[3][1][0], cube[3][0][0]
+            cube[2][0][0], cube[2][0][1], cube[2][0][2], cube[2][1][0], cube[2][1][2], cube[2][2][0], cube[2][2][1], cube[2][2][2] = cube[2][2][0], cube[2][1][0], cube[2][0][0], cube[2][2][1], cube[2][0][1], cube[2][2][2], cube[2][1][2], cube[2][0][2]
+    print(str(cube[4]).replace("[", "").replace("'", "").replace("], ", "\n").replace("]", "").replace(", ", ""))

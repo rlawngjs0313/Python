@@ -1,16 +1,13 @@
-import sys
+import sys  # 1946번 신입 사원
 
-N = int(input())
-A_List = list(map(int, sys.stdin.readline().split()))
-B_List = list(map(int, sys.stdin.readline().split()))
-AResultList = [0 for _ in range(N)]
-result = 0
+T = int(input())
 
-for i in range(N):
-    mx = max(B_List)
-    mn = min(A_List)
-    result += mx * mn
-    A_List.pop(A_List.index(mn))
-    B_List.pop(B_List.index(mx))
-
-print(result)
+for _ in range(T):
+    N = int(input())
+    mx, result = 0, 0
+    L1, temp = [], []
+    for j in range(N):
+        L1.append(list(map(int, sys.stdin.readline().split())))
+    L1.sort(key=lambda x: (x[0]))
+    # 엄
+    print(result)

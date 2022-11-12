@@ -1,25 +1,17 @@
-import sys, bisect
+import sys
 
-N = int(input())
-A = list(map(int, sys.stdin.readline().split()))
-sortedA = [A[0]]
-dp = [0 for _ in range(N)]
-length = 1
+T = int(input())
 
-for i, j in zip(A[1:], range(1, N+1)):
-    Idx = bisect.bisect_left(sortedA, i)
-    if Idx == length:
-        sortedA.append(i)
-        length += 1
-    else:
-        sortedA[Idx] = i
-    dp[j] = Idx
-
-print(length)
-result = []
-for i in range(N-1, -1, -1):
-    if dp[i] == length - 1:
-        result.append(A[i])
-        length -= 1
-result.reverse()
-print(*result)
+for i in range(T):
+    N = int(sys.stdin.readline())
+    data = []
+    result = 1
+    for j in range(N):
+        data.append(list(map(int, sys.stdin.readline().split())))
+    data.sort(key=lambda x: (x[0]))
+    last = 0
+    for j in range(N-1):
+        if data[j+1][1] < data[last][1]:
+            last = j + 1
+            result += 1
+    print(result)

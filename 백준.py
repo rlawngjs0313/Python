@@ -1,36 +1,17 @@
-import sys      # 1517번 버블 소트
-sys.setrecursionlimit(1000000)
+import sys, heapq  #1202번 보석 도둑
 
-def mergeSort(start, end):
-    global swap, A
+N, K = map(int, sys.stdin.readline().split())
+Data = []
+backpack = []
+result = 0
 
-    if start < end:
-        mid = (start + end) // 2
-        mergeSort(start, mid)
-        mergeSort(mid + 1, end)
+for _ in range(N):  # 힙 정렬 이용해서 시간 줄일 예정
+    Data.append(list(map(int, sys.stdin.readline().split())))
+for _ in range(K):  # 힙 정렬 이용해서 시간 줄일 예정
+    heapq.heappush(backpack, int(sys.stdin.readline()))
 
-        a, b = start, mid + 1
-        temp = []
+# 최대 가격으로 정렬된 보석과 최소 무게로 정렬된 가방
+# 비교하면서 최소 무게에 들어갈 수 있으면 넣고 아님 다른 가방 찾기
+# 찾는데 없으면 패스
 
-        while a <= mid and b <= end:
-            if A[a] <= A[b]:
-                temp.append(A[a])
-                a += 1
-            else:
-                temp.append(A[b])
-                b += 1
-                swap += (mid - a + 1)
-
-        if a <= mid:
-            temp = temp + A[a:mid + 1]
-        if b <= end:
-            temp = temp + A[b:end + 1]
-
-        for i in range(len(temp)):
-            A[start + i] = temp[i]
-
-N = int(input())
-A = list(map(int, sys.stdin.readline().split()))
-swap = 0
-mergeSort(0, N-1)
-print(swap)
+print(result)

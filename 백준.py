@@ -1,17 +1,31 @@
-import sys, heapq  #1202번 보석 도둑
+import sys, heapq
 
-N, K = map(int, sys.stdin.readline().split())
+N, K = map(int,input().split())
 Data = []
 backpack = []
+
+for _ in range(N):
+    Data.append([int(x) for x in sys.stdin.readline().rstrip().split()])
+for _ in range(K):
+    backpack.append(int(sys.stdin.readline().rstrip()))
+
+Data.sort()
+backpack.sort()
+
 result = 0
+temp = []
 
-for _ in range(N):  # 힙 정렬 이용해서 시간 줄일 예정
-    Data.append(list(map(int, sys.stdin.readline().split())))
-for _ in range(K):  # 힙 정렬 이용해서 시간 줄일 예정
-    heapq.heappush(backpack, int(sys.stdin.readline()))
+for i in backpack:
+    while Data:
+        if Data[0][0] <= i:
+            heapq.heappush(temp, -Data[0][1])
+            heapq.heappop(Data)
+        else:
+            break
 
-# 최대 가격으로 정렬된 보석과 최소 무게로 정렬된 가방
-# 비교하면서 최소 무게에 들어갈 수 있으면 넣고 아님 다른 가방 찾기
-# 찾는데 없으면 패스
+    if temp:
+        result += -heapq.heappop(temp)
+    elif not Data:
+        break
 
 print(result)

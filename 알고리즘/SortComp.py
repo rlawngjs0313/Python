@@ -77,5 +77,5 @@ sel_sort2(L1)
 print("select sort(2) time: ", time.time() - start)
 
 start = time.time()
-sorted(L1)
+L1.sort()
 print("python sort time: ", time.time() - start)

@@ -1,3 +1,4 @@
+import sys
 import random
 import time
 
@@ -55,27 +56,10 @@ def sel_sort2(a:list):
         a[i], a[min_idx] = a[min_idx], a[i]
 
 L1 = random.sample(range(1, 100000), 10000)
+Testset = ["bubble sort time: ", "insert sort(1) time: ", "insert sort(2) time: ", "select sort(1) time: ", "select sort(2) time: ", "python sort time: "]
+Testdef = [bubble(L1), ins_sort1(L1), ins_sort2(L1), sel_sort1(L1), sel_sort2(L1), L1.sort()]
 
-start = time.time()
-bubble(L1)
-print("bubble sort time: ", time.time() - start)
-
-start = time.time()
-ins_sort1(L1)
-print("insert sort(1) time: ", time.time() - start)
-
-start = time.time()
-ins_sort2(L1)
-print("insert sort(2) time: ", time.time() - start)
-
-start = time.time()
-sel_sort1(L1)
-print("select sort(1) time: ", time.time() - start)
-
-start = time.time()
-sel_sort2(L1)
-print("select sort(2) time: ", time.time() - start)
-
-start = time.time()
-L1.sort()
-print("python sort time: ", time.time() - start)
+for i, j in zip(Testset, Testdef):
+    start = time.time()
+    j
+    print(i, time.time() - start)

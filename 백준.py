@@ -1,20 +1,20 @@
 import sys
-from heapq import heappop, heappush
 
-N = int(input())
-L1 = []
+A, B = map(int, sys.stdin.readline().split())
 result = 0
 
-if N == 1:
-    print(0)
-    exit()
+while A != B and A < B:
+    if B % 2 == 0:
+        B //= 2
+        result += 1
+    elif str(B)[-1] == '1':
+        B //= 10
+        result += 1
+    else:
+        print(-1)
+        exit()
 
-for i in range(N):
-    heappush(L1, int(sys.stdin.readline()))
-
-while len(L1) != 1:
-    temp = heappop(L1) + heappop(L1)
-    heappush(L1, temp)
-    result += temp
-
-print(result)
+if A > B:
+    print(-1)
+else:
+    print(result+1)

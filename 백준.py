@@ -1,16 +1,17 @@
-import sys
+import sys  # 1700번 도전
 
-N = int(input())
+N, K = map(int, sys.stdin.readline().split())
 L1 = list(map(int, sys.stdin.readline().split()))
-L1.sort()
+L2 = set(L1[:N])
+result = 0
 
-result = [1]
+for i in range(N, K, N):
+    temp = set(L1[i:i+N])
+    A, B = L2.difference(temp), temp.difference(L2)
+    if len(A) != 0 and len(B) != 0:
+        result += len(B)
+        for j, k in zip(A, B):
+            L2.add(k)
+            L2.remove(j)
 
-last = result[-1]
-for i in L1:
-    if i > last:
-        break
-    else:
-        last += i
-
-print(last)
+print(result)

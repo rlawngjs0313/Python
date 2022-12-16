@@ -1,39 +1,21 @@
 import sys
-from heapq import heappop, heappush
+import heapq
 
 N = int(input())
 L1 = []
-L2 = []
-L3 = []
-result = 0
+result = []
 
 for i in range(N):
-    temp = int(sys.stdin.readline())
-    if temp < 0:
-        heappush(L1, temp)
-    elif temp > 1:
-        heappush(L2, -1*temp)
-    else:
-        heappush(L3, temp)
+    L1.append(list(map(int, sys.stdin.readline().split())))
 
-while L2 != []:
-    temp = -1*heappop(L2)
-    if L2 != []:
-        temp *= -1*heappop(L2)
-        result += temp
-    else:
-        result += temp
+L1.sort(key=lambda x:(x[0], x[1]))
+heapq.heappush(result, L1.pop(0)[1])
 
-while L1 != []:
-    temp = heappop(L1)
-    if L1 != []:
-        temp *= heappop(L1)
-        result += temp
+for i in L1:
+    if i[0] < result[0]:
+        heapq.heappush(result, i[1])
     else:
-        if L3 != [] and L3[0] == 0:
-            heappop(L3)
-        else:
-            result += temp
+        heapq.heappop(result)
+        heapq.heappush(result, i[1])
 
-result += sum(L3)
-print(result)
+print(len(result))

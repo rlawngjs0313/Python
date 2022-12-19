@@ -1,29 +1,38 @@
-import sys  # 1700번 도전
+import sys
+sys.setrecursionlimit(100000)
 
-N, K = map(int, sys.stdin.readline().split())
-L1 = list(map(int, sys.stdin.readline().split()))
-L2 = []
-result = 0
+def solution(L1:list) -> list:
+    sL1, sL2, sL3, sL4 = [], [], [], []
+    isProblem = False
+    for i in range(len(L1)//2):
+        sL1.append(L1[i][:len(L1)//2])
+        sL2.append(L1[len(L1)//2 + i][:len(L1)//2])
+        sL3.append(L1[i][len(L1)//2:])
+        sL4.append(L1[len(L1)//2 + i][len(L1)//2:])
 
-while len(L2) != N and L1 != []:
-    temp = L1.pop(0)
-    if temp not in L2:
-        L2.append(temp)
+    for i in range(len(L1)):
+        if i == 0 and (1 in L1[i] and 0 in L1[i]):
+            isProblem = True
+            solution(sL1)
+            solution(sL2)
+            solution(sL3) 
+            solution(sL4)
+            break
+        elif i > 0 and L1[i-1] != L1[i]:
+            isProblem = True
+            solution(sL1)
+            solution(sL2)
+            solution(sL3) 
+            solution(sL4)
+            break
+    
+    if not isProblem:
+        result[L1[0][0]] += 1
+        return 0
 
-while L1 != []:
-    i = L1.pop(0)
-    if i not in L2:
-        L3 = []
-        cnt = 0
-        for j in L2:
-            if j in L1:
-                L3.append([-1*(L1.index(j)), cnt])
-            else:
-                L3.append([-(K+1), cnt])
-            cnt += 1
-        L3.sort(key=lambda x: (x[0]))
-        del L2[L3[0][1]]
-        L2.append(i)
-        result += 1
+N = int(input())
+L1 = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
+result = [0, 0]
 
-print(result)
+solution(L1)
+print(f"{result[0]}\n{result[1]}")

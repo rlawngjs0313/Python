@@ -2,16 +2,6 @@ import sys
 import time
 import pyautogui as pa
 import pydirectinput
-import os
-from win32comext.shell import shell
-
-ASADMIN = 'asadmin'
-
-print(sys.argv)
-if sys.argv[-1] != ASADMIN:
-    script = os.path.abspath(sys.argv[0])
-    params = ' '.join([script] + sys.argv[1:] + [ASADMIN])
-    shell.ShellExecuteEx(lpVerb='runas', lpFile=sys.executable, lpParameters=params)
 
 cnt = 0
 

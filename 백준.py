@@ -1,16 +1,27 @@
 import sys
 
-N, K = map(int, sys.stdin.readline().split())
+N = int(input())
 L1 = []
-temp = input()
+result = 0
 
-for i in temp:
-    while L1 != [] and L1[-1] < i and K > 0:
-        L1.pop()
-        K -= 1
-    L1.append(i)
+temp1 = list(map(int, sys.stdin.readline().split()))
+temp2 = list(map(int, sys.stdin.readline().split()))
+for i in range(N):
+    L1.append([temp1[i], temp2[i]])
 
-if K > 0:
-    print(''.join(L1[:-K]))
-else:
-    print(''.join(L1))
+minX = min(temp1)
+L1.sort(key=lambda x:(x[0], x[1]))
+
+while L1:
+    if L1[0][0] >= L1[0][1] and L1[0][0] == minX:
+        L1.pop(0)
+    else:
+        while L1[0][0] < L1[0][1]:
+            for i in L1:
+                if i[0] < i[1]:
+                    i[0] += 30
+                    result += 1
+        L1.sort(key=lambda x:(x[0], x[1]))
+                
+            
+print(result)

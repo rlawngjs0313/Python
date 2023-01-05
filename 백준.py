@@ -1,19 +1,23 @@
 import sys
+sys.setrecursionlimit(100000)
 
-N = int(input())
-L1 = [0 for _ in range(26)]
+G = int(input())
+P = int(input())
+L1 = list(range(G+1))
 result = 0
 
-for i in range(N):
-    data = sys.stdin.readline().rstrip()
-    length = len(data)-1
-    for j in data:
-        L1[ord(j) % 65] += 10**length
-        length -= 1
+def find(n):
+    if L1[n] != n:
+        L1[n] = find(L1[n])
+    else:
+        L1[n] -= 1
+    return L1[n]
 
-L1.sort(reverse=True)
-
-for i, j in zip(L1, range(9, 0, -1)):
-    result += i*j
+for i in range(P):
+    data = int(sys.stdin.readline())
+    if find(data) == -1:
+        print(result)
+        exit()
+    result += 1
 
 print(result)

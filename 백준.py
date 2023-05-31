@@ -1,23 +1,16 @@
-import sys
-sys.setrecursionlimit(100000)
+T = 10
 
-G = int(input())
-P = int(input())
-L1 = list(range(G+1))
-result = 0
+for test_case in range(1, T+1):
+    N = int(input())
+    L1 = list(map(int, input().split()))
+    result = 0
 
-def find(n):
-    if L1[n] != n:
-        L1[n] = find(L1[n])
-    else:
-        L1[n] -= 1
-    return L1[n]
-
-for i in range(P):
-    data = int(sys.stdin.readline())
-    if find(data) == -1:
-        print(result)
-        exit()
-    result += 1
-
-print(result)
+    for idx, value in enumerate(L1):
+        if value == 0:
+            continue
+        else:
+            if max(L1[idx-2:idx+3]) == value:
+                large = max(L1[idx-2:idx+3].remove(value))
+                result += value - large
+    
+    print(f'#{test_case} {result}')

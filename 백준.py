@@ -1,16 +1,14 @@
-T = 10
+S = input()
+T = list(input())
 
-for test_case in range(1, T+1):
-    N = int(input())
-    L1 = list(map(int, input().split()))
-    result = 0
+while len(T) != len(S):
+    if T[-1] == 'A':
+        T.pop()
+    else:
+        T.pop()
+        T.reverse()
 
-    for idx, value in enumerate(L1):
-        if value == 0:
-            continue
-        else:
-            if max(L1[idx-2:idx+3]) == value:
-                large = max(L1[idx-2:idx+3].remove(value))
-                result += value - large
-    
-    print(f'#{test_case} {result}')
+if T == list(S):
+    print(1)
+else:
+    print(0)

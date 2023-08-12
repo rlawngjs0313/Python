@@ -1,21 +1,15 @@
-N = int(input())
-L1 = list(map(int, input().split()))
-M = int(input())
-L2 = list(map(int, input().split()))
-L1.sort(reverse=True)
-L2.sort(reverse=True)
-if L1[0] < L2[0]:
-    print(-1)
-    exit()
+import sys
 
-result = 0
-while True:
-    if L2 == []:
-        print(result)
-        exit()
-    for i in L1:
-        for idx, j in enumerate(L2):
-            if i >= j:
-                L2.pop(idx)
-                break
-    result += 1
+N = int(input())
+L1 = []
+
+for _ in range(N):
+    L1.append(list(map(int, sys.stdin.readline().split())))
+
+DP = [0 for _ in range(N+1)]
+for i in range(N+1):
+    for j in range(i+L1[i][0], N+1):
+        if DP[j] < DP[i] + L1[i][1]:
+            DP[j] = DP[i] + L1[i][1]
+
+print(DP[-1])

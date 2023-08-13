@@ -1,10 +1,13 @@
+import sys
 N = int(input())
-Ai = list(map(int, input().split()))
 
-DP = [1 for _ in range(N+1)]
+DP1 = [0, 0, 0]
+DP2 = [0, 0, 0]
 for i in range(N):
-    for j in range(i):
-        if Ai[i] > Ai[j]:
-            DP[i] = max(DP[i], DP[j]+1)
-
-print(max(DP))
+    R, G, B = map(int, sys.stdin.readline().split())
+    DP2[0] = min(R+DP1[1], R+DP1[2])
+    DP2[1] = min(G+DP1[0], G+DP1[2])
+    DP2[2] = min(B+DP1[0], B+DP1[1])
+    if i != N-1:
+        DP1[:] = DP2[:]
+print(min(DP2))

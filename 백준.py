@@ -1,8 +1,7 @@
 N = int(input())
-L1 = list(map(int, input().split()))
-DP = [L1[0]]
+DP = [0, 1]
 
-for i in L1[1:]:
-    DP.append(max(DP[-1]+i, i))
+for i in range(N-1):
+    DP.append(DP[-1]+DP[-2])
 
-print(max(DP))
+print(DP[-1])

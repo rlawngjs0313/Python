@@ -1,10 +1,9 @@
 N = int(input())
-DP = [0 for _ in range(N+1)]
-DP[1] = 1
-if N > 1:
-    DP[2] = 2
+L1 = list(map(int, input().split()))
+DP = L1[:]
 
-for i in range(3, N+1):
-    DP[i] = (DP[i-1] + DP[i-2])%15746
-
-print(DP[-1])
+for i in range(N):
+    for j in range(i):
+        if L1[i] > L1[j]:
+            DP[i] = max(DP[j]+L1[i], DP[i])
+print(max(DP))

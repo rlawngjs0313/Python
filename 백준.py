@@ -1,9 +1,20 @@
-N = int(input())
-L1 = list(map(int, input().split()))
-DP = L1[:]
+import sys
 
-for i in range(N):
-    for j in range(i):
-        if L1[i] > L1[j]:
-            DP[i] = max(DP[j]+L1[i], DP[i])
-print(max(DP))
+N = int(input())
+L1 = [0]
+DP = [0 for _ in range(N+1)]
+
+for _ in range(N):
+    L1.append(int(sys.stdin.readline()))
+
+if N == 1:
+    print(L1[-1])
+    exit()
+
+DP[1] = L1[1]
+DP[2] = DP[1] + L1[2]
+
+for i in range(3, N+1):
+    DP[i] = max(DP[i-3]+L1[i-1], DP[i-2]) + L1[i]
+
+print(DP[-1])

@@ -1,26 +1,18 @@
-# 1966번 구현문제 23:57
+#2563 구현 약 30:00
 
-T = int(input())
+N = int(input())
+L1 = [[0 for _ in range(101)] for _ in range(101)]
+result = 0
 
-for _ in range(T):
-    N, M = map(int, input().split())
-    L1 = list(map(int, input().split()))
-    result = 0
-    maxNum = max(L1)
+for _ in range(N):
+    w, h = map(int, input().split())
+    duple = 0
+    for i in range(10):
+        for j in range(10):
+            if L1[w+i][h+j] != 0:
+                duple += 1
+            L1[w+i][h+j] += 1
 
-    while True:
-        if L1[0] == maxNum:
-            if M == 0:
-                print(result+1)
-                break
-            else:
-                L1.pop(0)
-                maxNum = max(L1)
-                result += 1
-                M -= 1
-        else:
-            L1.append(L1.pop(0))
-            if M != 0:
-                M -= 1
-            else:
-                M = len(L1)-1
+    result += (100 - duple)
+
+print(result)

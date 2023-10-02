@@ -1,29 +1,30 @@
-# 2022 카카오 인턴쉽 / 성격 유형 검사하기 / 11:57
+# 2022 카카오 블라인드 / 신고 결과 받기 / 23:50
 
-def solution(survey, choices):
-    D1 = {"A":0,"N":0,"R":0,"T":0,"C":0,"F":0,"J":0,"M":0}
+from collections import defaultdict
+
+def solution(id_list, report, k):
+    banned = defaultdict(int)
+    D1 = defaultdict(set)
+    S1 = set()
     result = []
-    for i, j in zip(survey, choices):
-        if j < 4:
-            D1[i[0]] += 4-j
-        elif j > 4:
-            D1[i[1]] += j-4
+
+    for i in id_list:
+        D1[i] = set()
     
-    if D1["R"] >= D1["T"]:
-        result.append("R")
-    else:
-        result.append("T")
-    if D1["C"] >= D1["F"]:
-        result.append("C")
-    else:
-        result.append("F")
-    if D1["J"] >= D1["M"]:
-        result.append("J")
-    else:
-        result.append("M")
-    if D1["A"] >= D1["N"]:
-        result.append("A")
-    else:
-        result.append("N")
+    for i in report:
+        A, B = map(str, i.split())
+        D1[A].add(B)
     
-    return "".join(result)
+    for i in D1.values():
+        for j in i:
+            banned[j] += 1
+            if banned[j] == k:
+                S1.add(j)
+    
+    for i in D1.values():
+        result.append(len(i.intersection(S1)))
+    
+    return result
+    
+
+print(solution(["con", "ryan"], ["ryan con", "ryan con", "ryan con", "ryan con"], 3))

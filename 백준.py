@@ -1,30 +1,26 @@
-# 2022 카카오 블라인드 / 신고 결과 받기 / 23:50
-
-from collections import defaultdict
-
-def solution(id_list, report, k):
-    banned = defaultdict(int)
-    D1 = defaultdict(set)
-    S1 = set()
-    result = []
-
-    for i in id_list:
-        D1[i] = set()
-    
-    for i in report:
-        A, B = map(str, i.split())
-        D1[A].add(B)
-    
-    for i in D1.values():
-        for j in i:
-            banned[j] += 1
-            if banned[j] == k:
-                S1.add(j)
-    
-    for i in D1.values():
-        result.append(len(i.intersection(S1)))
-    
+def solution(cap, n, deliveries, pickups):
+    result = 0
+    while sum(deliveries) != 0 and sum(pickups) != 0:
+        A, B = min(cap, sum(deliveries)), cap
+        cnt = n
+        long = 0
+        while A != 0:
+            if deliveries[cnt-1] != 0:
+                long = max(long, cnt)
+            if deliveries[cnt-1] < A:
+                A -= deliveries[cnt-1]
+                deliveries[cnt-1] = 0
+            else:
+                deliveries[cnt-1] -= A
+                A = 0
+            if pickups[cnt-1] < B:
+                B -= pickups[cnt-1]
+                pickups[cnt-1] = 0
+            else:
+                pickups[cnt-1] -= B
+                B = 0
+            cnt -= 1
+        result += long*2
     return result
-    
 
-print(solution(["con", "ryan"], ["ryan con", "ryan con", "ryan con", "ryan con"], 3))
+print(solution(2, 7, [1, 0, 2, 0, 1, 0, 2], [0, 2, 0, 1, 0, 2, 0]))

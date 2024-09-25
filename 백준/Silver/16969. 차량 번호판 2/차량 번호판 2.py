@@ -1,11 +1,25 @@
-s=input()
-if  s[0]=='d': ans=10
-if s[0]=='c' : ans=26
-for i in range(1, len(s)) :
-    if s[i] == 'd' :
-        if s[i-1]==s[i]: ans*=9 ;ans%=1000000009
-        else: ans*=10 ;ans%=1000000009
-    elif s[i] == 'c' :
-        if s[i - 1] == s[i]: ans *= 25 ;ans%=1000000009
-        else: ans*=26 ;ans%=1000000009
-print(ans)
+import sys
+
+word = sys.stdin.readline().rstrip()
+
+last = word[0]
+result = 1
+if word[0] == 'c':
+    result *= 26
+else:
+    result *= 10
+for i in range(1, len(word)):
+    if last == word[i]:
+        if word[i] == 'c':
+            result *= 25
+        else:
+            result *= 9
+    else:
+        if word[i] == 'c':
+            result *= 26
+        else:
+            result *= 10
+    last = word[i]
+    result %= 1000000009
+
+sys.stdout.write(f"{result}")

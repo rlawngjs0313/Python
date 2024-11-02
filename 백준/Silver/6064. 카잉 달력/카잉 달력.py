@@ -7,9 +7,6 @@ T = int(input())
 for _ in range(T):
     M, N, x, y = map(int, input().split())
     lcm = math.lcm(M,N)
-    if x == y and x <= min(M,N):
-        print(f"{x}\n")
-        continue
     while x != y and (x <= lcm and y <= lcm):
         if x > y:
             y += N

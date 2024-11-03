@@ -3,13 +3,9 @@ from collections import deque, defaultdict
 input = sys.stdin.readline
 print = sys.stdout.write
 
-T = int(input())
-for _ in range(T):
-    A, B = map(int, input().split())
+def BFS(A, B):
     queue = deque([(A,'')])
     visited = defaultdict(int)
-    exe = ''
-    result = ''
     
     while queue:
         node, exe = queue.popleft()
@@ -25,12 +21,12 @@ for _ in range(T):
                 i[1:],i[0] = i[:3],i[3]
                 i = int(''.join(i))
             if i == B:
-                result = exe+j
-                node = i
-                break
+                return exe+j
             if visited[i] == 0:
                 queue.append((i,exe+j))
                 visited[i] = 1
-        if node == B:
-            break
-    print(f"{result}\n")
+
+T = int(input())
+for _ in range(T):
+    A, B = map(int, input().split())
+    print(f"{BFS(A,B)}\n")
